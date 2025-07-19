@@ -18,4 +18,9 @@ class BookscraperPipeline:
             if field in adapter and adapter[field]:
                 adapter[field] = float(adapter[field].replace("£", "").strip())
 
+        # --- change rating fields to number ---
+        rating_map = {"One": 1, "Two": 2, "Three": 3, "Four": 4, "Five": 5}
+        if "rating" in adapter and adapter["rating"]:
+            adapter["rating"] = rating_map.get(adapter["rating"], 0)
+
         return item
