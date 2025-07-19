@@ -10,4 +10,12 @@ from itemadapter import ItemAdapter
 
 class BookscraperPipeline:
     def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+
+        # --- Clean price fields ---
+        price_fields = ["price", "price_excl_tax", "price_incl_tax"]
+        for field in price_fields:
+            if field in adapter and adapter[field]:
+                adapter[field] = float(adapter[field].replace("£", "").strip())
+
         return item
