@@ -23,4 +23,10 @@ class BookscraperPipeline:
         if "rating" in adapter and adapter["rating"]:
             adapter["rating"] = rating_map.get(adapter["rating"], 0)
 
+        # --- extract number from stock availability ---
+        if "availability" in adapter and adapter["availability"]:
+            adapter["availability"] = int(
+                adapter["availability"].split(" (")[1].split(" ")[0]
+            )
+
         return item
