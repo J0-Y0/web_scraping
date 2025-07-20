@@ -13,7 +13,7 @@ class BookscraperPipeline:
         adapter = ItemAdapter(item)
 
         # --- Clean price fields ---
-        price_fields = ["price", "price_excl_tax", "price_incl_tax"]
+        price_fields = ["price", "price_excl_tax", "price_incl_tax",'tax']
         for field in price_fields:
             if field in adapter and adapter[field]:
                 adapter[field] = float(adapter[field].replace("£", "").strip())
@@ -29,4 +29,7 @@ class BookscraperPipeline:
                 adapter["availability"].split(" (")[1].split(" ")[0]
             )
 
+
+        # In stock (11 available)
         return item
+
