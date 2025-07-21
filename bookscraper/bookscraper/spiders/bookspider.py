@@ -8,6 +8,7 @@ class BookspiderSpider(scrapy.Spider):
     start_urls = ["https://books.toscrape.com"]
 
     def parse(self, response):
+        print("CONTENT-TYPE:==============", response.headers.get("Content-Type"))
 
         books = response.css("article.product_pod")
         for book in books:
